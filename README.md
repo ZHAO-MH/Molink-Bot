@@ -7,7 +7,7 @@
 
 ## 快速开始
 
-### 方案 1 - 通过 Docker 使用 （推荐）
+### 方案一 - 通过 Docker 运行 （推荐）
 
 1. 确保 Docker 已安装
 3. 拉取并运行容器：
@@ -24,7 +24,7 @@ docker run -d \
 ```
 
 
-### 方案 2 - 直接运行 Jar
+### 方案二 - 直接运行 Jar
 
 1. 从 [Releases](https://github.com/ZHAO-MH/Molink-Bot/releases) 下载最新版本的 Jar 文件。
 2. 新建 ./data/config.json 文件，输入如下内容：
@@ -43,20 +43,9 @@ docker run -d \
 
 ## 构建
 
-## 第三方引用
+## 许可证
 
-本项目中的事件系统基于 **[EventAPIRemastered](https://github.com/lsiem/EventAPIRemastered)** 重构。
+本项目核心代码采用 Apache License 2.0 进行许可，详见 LICENSE 文件。
+事件系统部分基于 MIT 许可的 EventAPIRemastered，修改后仍遵循 MIT 许可证，原始版权归原作者所有。
 
-- **核心引用类**：`EventManager.java`（事件注册与分发引擎）
-- **原始作者**：DarkMagician6 / lsiem
-- **引用协议**：MIT License
-- **我们的修改**：
-    - `EventManager` 由静态类改为实例类，注入业务服务（Services）。
-    - 新增 `call(JsonObject)` 方法以支持 Go-CQHTTP 协议。
-    - 内部 `MethodData` 改用 Java Record 实现。
-    - 包名由 `com.darkmagician6.eventapi` 改为 `com.zhaomh.event`。
-
-> 修改部分同样遵循 MIT 协议，原始版权归 lsiem 所有。
-
-本项目框架核心采用 GNU Lesser General Public License v3.0。
-使用本框架编写的插件不被视为衍生作品，可以按独立许可发布。
+基于本框架开发的插件可自由选择许可协议，不受 Apache 2.0 传染性限制。
