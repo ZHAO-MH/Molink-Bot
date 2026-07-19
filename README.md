@@ -5,9 +5,16 @@
 
 *当前的外部插件读取方法的实现由AI编写+人工粗改，效果不甚良好*
 
+**当前项目正在初步开发阶段，README文件也在逐步完善，下列内容仅供参考。**
+
 ## 快速开始
 
 ### 方案 1 - 通过 Docker 使用 （推荐）
+
+1. 确保 Docker 已安装
+2. 拉取镜像：`docker pull zhaomh/molink-bot`
+3. 运行容器：`docker run -d -p 8079:8079 -p 8078:8078 --name molink-bot zhaomh/molink-bot`
+
 
 ### 方案 2 - 直接运行 Jar
 
