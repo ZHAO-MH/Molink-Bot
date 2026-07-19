@@ -13,7 +13,12 @@
 
 1. 确保 Docker 已安装
 2. 拉取镜像：`docker pull zhaomh/molink-bot`
-3. 运行容器：`docker run -d -p 8079:8079 -p 8078:8078 --name molink-bot zhaomh/molink-bot`
+3. 运行容器：
+```
+docker run -d -p 8079:8079 -p 8078:8078 \
+-e HOST=0.0.0.0 -e PORT=Napcat端口 -e TOKEN=ws的TOKEN \
+--name molink-bot zhaomh/molink-bot:latest
+```
 
 
 ### 方案 2 - 直接运行 Jar
