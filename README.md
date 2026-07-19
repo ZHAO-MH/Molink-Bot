@@ -45,7 +45,7 @@ docker run -d \
 
 ## 许可证
 
-本项目核心代码采用 Apache License 2.0 进行许可，详见 LICENSE 文件。
+本项目核心代码采用 GNU Lesser General Public License v3.0 进行许可，详见 LICENSE 文件。
 事件系统部分基于 MIT 许可的 EventAPIRemastered，修改后仍遵循 MIT 许可证，原始版权归原作者所有。
 
 基于本框架开发的插件可自由选择许可协议，不受 Apache 2.0 传染性限制。
