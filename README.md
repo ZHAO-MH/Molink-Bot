@@ -17,6 +17,7 @@
 ```
 docker run -d -p 8079:8079 -p 8078:8078 \
 -e HOST=0.0.0.0 -e PORT=Napcat端口 -e TOKEN=ws的TOKEN \
+-v /data:/app/data -v /plugins:/app/plugins \
 --name molink-bot zhaomh/molink-bot:latest
 ```
 
