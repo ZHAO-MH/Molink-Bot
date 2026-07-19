@@ -7,6 +7,25 @@
 
 ## 快速开始
 
+### 方案 1 - 通过 Docker 使用 （推荐）
+
+### 方案 2 - 直接运行 Jar
+
+1. 从 [Releases](https://github.com/ZHAO-MH/Molink-Bot/releases) 下载最新版本的 Jar 文件。
+2. 新建 /data/config.json 文件，输入如下内容：
+```json
+{
+  "bot_id": bot的QQ号,
+  "permissions": {
+    "owner": 你的QQ号,
+    "admins": [
+    ]
+  }
+}
+```
+3. 确保 8079, 8078 端口没有被占用，通过`java -jar Molink-Bot.jar`启动框架。
+4. 向框架对应QQ好友发送`status`，若收到响应，则代表框架正确运行。
+
 ## 构建
 
 ## 第三方引用
