@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'com.zhaomh'
+version = '1.0.0'
+
+application {
+    mainClass = 'com.zhaomh.Main'
+    applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8','-Dstdout.encoding=UTF-8']
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.java-websocket:Java-WebSocket:1.5.3'
+
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    implementation 'org.slf4j:slf4j-nop:1.7.36'
+
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.zhaomh.Main'
+    }
+}
+
+shadowJar {
+    // 可选：设置输出文件名（默认是 <项目名>-<版本>-all.jar）
+    archiveBaseName.set(project.name)
+    archiveClassifier.set('all')
+    manifest {
+        attributes 'Main-Class': 'com.zhaomh.Main'
+    }
+}
+
+assemble.dependsOn shadowJar
