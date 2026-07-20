@@ -5,7 +5,7 @@ WORKDIR /app
 
 RUN mkdir -p /app/plugins
 
-COPY ./build/libs/ChatBot-1.0.0-all.jar /app/app.jar
+COPY ./build/libs/MolinkBot-1.0.0-all.jar /app/MolinkBot.jar
 COPY ./plugins/ /app/plugins/
 
 ENV HOST=0.0.0.0
@@ -14,4 +14,4 @@ ENV TOKEN=""
 
 EXPOSE 8079 8078
 
-ENTRYPOINT ["java","-Xmx1042m", "-Xms512m", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java","-Xmx1042m", "-Xms512m", "-jar", "/app/MolinkBot.jar"]
