@@ -148,6 +148,7 @@ public class CommandManager {
             } else {
                 accessor.getService(MessageService.class).sendPrivateMessage(sender.getUserId(), MessageChain.text("执行命令 " + commandName + " 时发生了内部错误"));
             }
+            log.error("执行命令 {} 时发生了内部错误", commandName, ex);
         }
     }
 
