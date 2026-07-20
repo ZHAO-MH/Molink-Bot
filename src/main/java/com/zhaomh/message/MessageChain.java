@@ -74,6 +74,10 @@ public class MessageChain {
         return MessageChain.of(new TextSegment(text));
     }
 
+    public static MessageChain image(byte[] imageBytes) {
+        return MessageChain.of(new ImageSegment("base64://"+java.util.Base64.getEncoder().encodeToString(imageBytes)));
+    }
+
     public static MessageChain reply(MessageId messageId, MessageSegment... segments) {
         ArrayList<MessageSegment> list = new ArrayList<>();
         list.add(new ReplySegment(messageId));

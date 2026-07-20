@@ -14,8 +14,12 @@ import com.zhaomh.core.annotation.Command;
 import com.zhaomh.context.CommandContext;
 import com.zhaomh.command.CommandManager;
 import com.zhaomh.command.RequirePermission;
+import com.zhaomh.message.MessageChain;
 import com.zhaomh.model.Role;
 import com.zhaomh.plugin.BasePlugin;
+import com.zhaomh.util.CardBuilder;
+import com.zhaomh.util.HtmlRenderer;
+import com.zhaomh.util.NumberUtil;
 
 public class TestPlugin extends BasePlugin {
     private CommandManager commandManager;
@@ -59,5 +63,33 @@ public class TestPlugin extends BasePlugin {
     @Command("test/reply")
     public void reply(CommandContext ctx) {
         ctx.sentReplyMessage("This is a reply message.");
+    }
+
+    @Command("test/html/card/normal")
+    public void htmlCardNormal(CommandContext ctx) {
+        if (ctx.getArgs().length > 0 && NumberUtil.isInteger(ctx.getArgs()[0]))
+            ctx.sendMessage(MessageChain.image(HtmlRenderer.render(CardBuilder.normal("Title", "Content", "Footer"),Integer.parseInt(ctx.getArgs()[0]))));
+        else ctx.sendMessage(MessageChain.image(HtmlRenderer.render(CardBuilder.normal("Title", "Content", "Footer"),400)));
+    }
+
+    @Command("test/html/card/success")
+    public void htmlCardSuccess(CommandContext ctx) {
+        if (ctx.getArgs().length > 0 && NumberUtil.isInteger(ctx.getArgs()[0]))
+            ctx.sendMessage(MessageChain.image(HtmlRenderer.render(CardBuilder.success("Title", "Content", "Footer"),Integer.parseInt(ctx.getArgs()[0]))));
+        else ctx.sendMessage(MessageChain.image(HtmlRenderer.render(CardBuilder.success("Title", "Content", "Footer"),400)));
+    }
+
+    @Command("test/html/card/warning")
+    public void htmlCardWarning(CommandContext ctx) {
+        if (ctx.getArgs().length > 0 && NumberUtil.isInteger(ctx.getArgs()[0]))
+            ctx.sendMessage(MessageChain.image(HtmlRenderer.render(CardBuilder.warning("Title", "Content", "Footer"),Integer.parseInt(ctx.getArgs()[0]))));
+        else ctx.sendMessage(MessageChain.image(HtmlRenderer.render(CardBuilder.warning("Title", "Content", "Footer"),400)));
+    }
+
+    @Command("test/html/card/notice")
+    public void htmlCardNotice(CommandContext ctx) {
+        if (ctx.getArgs().length > 0 && NumberUtil.isInteger(ctx.getArgs()[0]))
+            ctx.sendMessage(MessageChain.image(HtmlRenderer.render(CardBuilder.notice("Title", "Content", "Footer"),Integer.parseInt(ctx.getArgs()[0]))));
+        else ctx.sendMessage(MessageChain.image(HtmlRenderer.render(CardBuilder.notice("Title", "Content", "Footer"),400)));
     }
 }

@@ -13,17 +13,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.zhaomh.id.MessageId;
 import com.zhaomh.id.UserId;
-import com.zhaomh.logger.Logger;
-import com.zhaomh.logger.LoggerFactory;
 import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@Getter
 public class MessageSegment {
-    private static final Logger log = LoggerFactory.getLogger(MessageSegment.class);
-    @Getter
     private final String type;
     protected final JsonObject data;
 
@@ -48,12 +45,12 @@ public class MessageSegment {
 
         register("image", message -> {
             JsonObject data = message.getAsJsonObject("data");
-            String url = data.has("url") ? data.get("url").getAsString() : null;
             String file = data.has("file") ? data.get("file").getAsString() : null;
+            String url = data.has("url") ? data.get("url").getAsString() : null;
             long size = data.has("file_size") ? data.get("file_size").getAsLong() : 0L;
             String summary = data.has("summary") ? data.get("summary").getAsString() : null;
             int subType = data.has("sub_type") ? data.get("sub_type").getAsInt() : 0;
-            return new ImageSegment(url, file, size, summary, subType);
+            return new ImageSegment(file, url, size, summary, subType);
         });
 
         register("reply", message -> {
@@ -92,9 +89,6 @@ public class MessageSegment {
                 '}';
     }
 
-    public JsonObject getData() {
-        return data;
-    }
     public String getPlainText() {
         return "";
     }

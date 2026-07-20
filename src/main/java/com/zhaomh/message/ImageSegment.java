@@ -20,7 +20,7 @@ public class ImageSegment extends MessageSegment{
     private final String summary;
     private final int subType;
 
-    public ImageSegment(String url, String file, long size, String summary, int subType) {
+    public ImageSegment(String file, String url,long size, String summary, int subType) {
         super("image", new JsonObject());
         data.addProperty("url", url);
         data.addProperty("file", file);
@@ -32,6 +32,16 @@ public class ImageSegment extends MessageSegment{
         this.size = size;
         this.summary = summary;
         this.subType = subType;
+    }
+
+    public ImageSegment(String file) {
+        super("image", new JsonObject());
+        data.addProperty("file", file);
+        this.file = file;
+        this.url = null;
+        this.size = 0;
+        this.summary = null;
+        this.subType = 0;
     }
 
 

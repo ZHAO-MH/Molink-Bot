@@ -23,6 +23,7 @@ import com.zhaomh.logger.Logger;
 import com.zhaomh.logger.LoggerFactory;
 import com.zhaomh.plugin.PluginManager;
 import com.zhaomh.plugin.impl.*;
+import com.zhaomh.util.HtmlRenderer;
 import com.zhaomh.util.JsonUtil;
 import com.zhaomh.web.LoggingWebSocketServer;
 import com.zhaomh.web.WebUiServer;
@@ -63,6 +64,7 @@ public class ApplicationContext implements ServiceRegistry, Accessor {
     public ApplicationContext(String wsUrl) {
         log.info("正在初始化 ApplicationContext...");
         this.logServer = new LoggingWebSocketServer(8078);
+        HtmlRenderer.init();
 
         // ---------- 加载配置（无依赖） ----------
         this.botConfig = loadBotConfig();
@@ -141,6 +143,7 @@ public class ApplicationContext implements ServiceRegistry, Accessor {
      */
     public void shutdown() {
         log.info("正在关闭 ApplicationContext...");
+        HtmlRenderer.shutdown();
         // 1. 停止 WebUi 服务器
         try {
             webUiServer.stop();
