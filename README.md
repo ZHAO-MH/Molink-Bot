@@ -47,3 +47,4 @@ docker run -d \
 
 本项目核心代码采用 GNU Lesser General Public License v3.0 进行许可，详见 LICENSE 文件。
 事件系统部分基于 MIT 许可的 EventAPIRemastered，修改后仍遵循 MIT 许可证，原始版权归原作者所有。
+使用本框架编写的插件不被视为衍生作品，可以按独立许可发布。
