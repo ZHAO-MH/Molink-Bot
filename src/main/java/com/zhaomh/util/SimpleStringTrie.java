@@ -11,6 +11,7 @@ package com.zhaomh.util;
 
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleStringTrie<T>{
     private final Node<T> root = new Node<>();
@@ -81,7 +82,7 @@ public class SimpleStringTrie<T>{
         for (Map.Entry<Character, Node<T>> entry : node.children.entrySet()) {
             path.add(entry.getKey());
             getAllKeysHelper(entry.getValue(), path, keys);
-            path.remove(path.size() - 1);
+            path.removeLast();
         }
         return keys;
     }
@@ -95,7 +96,7 @@ public class SimpleStringTrie<T>{
     }
 
     private static class Node<D> {
-        Map<Character, Node<D>> children = new HashMap<>();
+        Map<Character, Node<D>> children = new ConcurrentHashMap<>();
         D value = null;
         boolean isWord = false;
     }
