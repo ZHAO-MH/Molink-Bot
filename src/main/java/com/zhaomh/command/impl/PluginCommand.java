@@ -10,13 +10,11 @@
 package com.zhaomh.command.impl;
 
 import com.zhaomh.builtin.BuiltinBotPlugin;
+import com.zhaomh.command.RequirePermission;
 import com.zhaomh.core.annotation.Command;
 import com.zhaomh.context.CommandContext;
 import com.zhaomh.core.Plugin;
 import com.zhaomh.plugin.PluginManager;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class PluginCommand {
     private final PluginManager pluginManager;
@@ -44,6 +42,7 @@ public class PluginCommand {
     }
 
     @Command("plugin/enable")
+    @RequirePermission
     public void enablePlugin(CommandContext ctx) {
         Plugin plugin = check(ctx);
         if (plugin == null) return;
@@ -56,6 +55,7 @@ public class PluginCommand {
     }
 
     @Command("plugin/disable")
+    @RequirePermission
     public void disablePlugin(CommandContext ctx) {
         Plugin plugin = check(ctx);
         if (plugin == null) return;
@@ -72,6 +72,7 @@ public class PluginCommand {
     }
 
     @Command("plugin/load")
+    @RequirePermission
     public void loadPlugin(CommandContext ctx) {
         if (ctx.getArgs().length == 0) {
             ctx.sendAtMessage("请输入要加载的插件名称");
@@ -95,6 +96,7 @@ public class PluginCommand {
     }
 
     @Command("plugin/unload")
+    @RequirePermission
     public void unloadPlugin(CommandContext ctx) {
         if (ctx.getArgs().length == 0) {
             ctx.sendAtMessage("请输入要卸载的插件名称");
@@ -122,6 +124,7 @@ public class PluginCommand {
     }
 
     @Command("plugin/reload")
+    @RequirePermission
     public void reloadPlugin(CommandContext ctx) {
         if (ctx.getArgs().length == 0) {
             ctx.sendAtMessage("请输入要重载的插件名称");

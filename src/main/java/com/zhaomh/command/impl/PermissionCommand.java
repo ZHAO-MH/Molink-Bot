@@ -37,7 +37,7 @@ public class PermissionCommand {
     }
 
     @Command("perm/set")
-    @RequirePermission(Role.ADMIN)
+    @RequirePermission
     public void setPermission(CommandContext ctx) {
         AtSegment as = ctx.getMessage().getFirstAtSegment();
         if (as == null || ctx.getArgs().length < 2) {
