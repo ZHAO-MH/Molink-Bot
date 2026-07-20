@@ -1,9 +1,8 @@
-FROM eclipse-temurin:21-jre-noble
+FROM eclipse-temurin:21-jre
 LABEL authors="zhaomh"
 
 WORKDIR /app
 
-# 安装 Playwright 无头 Chromium 所需系统库及中文字体
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libnss3 \
     libnspr4 \
