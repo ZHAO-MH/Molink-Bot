@@ -14,4 +14,16 @@ public class NumberUtil {
     public static int random(int min, int max) {
         return (int) (Math.random() * (max - min + 1) + min);
     }
+
+    public static boolean inInterger(String str) {
+        if (str == null || str.isBlank())
+            return false;
+
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }
