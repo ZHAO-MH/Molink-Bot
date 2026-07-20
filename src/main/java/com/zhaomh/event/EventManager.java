@@ -1,7 +1,5 @@
 /*
  * ============================================================
- * 本文件基于 EventAPIRemastered 项目中的 EventManager 类修改而来。
- *
  * 【原始来源】
  *   项目名称  : EventAPIRemastered
  *   原始作者  : lsiem (基于 DarkMagician6 的原始 EventAPI)
@@ -9,17 +7,19 @@
  *   原始路径  : src/com/darkmagician6/eventapi/EventManager.java
  *   遵循协议  : MIT License (详见项目根目录 LICENSE.txt)
  *
- * 【主要修改内容】（相对于原始版本）
- *   1. 包名由 com.darkmagician6.eventapi 改为 com.zhaomh.event。
- *   2. 类由全静态方法 (static) 改为实例化类，并注入 Accessor 依赖。
- *   3. 新增 call(JsonObject json) 重载方法，支持 OneBot 协议 JSON 解析。
- *   4. 内部静态类 MethodData 重构为 Java Record 类型。
- *   5. 增加了日志支持（Logger）。
+ * 【修改/再分发声明】
+ *   本文件已被修改并整合至 [你的项目名] 中。
+ *   根据 MIT 许可证的要求，以上原始版权声明和免责声明已保留。
+ *   本修改后的版本整体依据 Mozilla Public License 2.0 (MPL-2.0) 分发。
+ *   您可以在遵守 MPL-2.0 条款的前提下使用本文件。
+ * ==============================================================
  *
- * 【修改者】
- *   ZHAO-MH
- *   修改日期：2026
- * ============================================================
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ * Copyright (C) 2026 ZHAO-MH
  */
 package com.zhaomh.event;
 

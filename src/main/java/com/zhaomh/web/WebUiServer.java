@@ -1,9 +1,17 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ * Copyright (C) 2026 ZHAO-MH
+ */
+
 package com.zhaomh.web;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import com.zhaomh.core.Accessor;
 import com.zhaomh.plugin.PluginManager;
@@ -106,9 +114,7 @@ public class WebUiServer {
 
     private void handleCommands(HttpExchange exchange) throws IOException {
         Map<String, Object> result = new LinkedHashMap<>();
-        // 假设 CommandManager 提供了获取所有命令名称的方法，如果没有，可以用反射获取
-        // 这里我们简单地返回一个列表（如果 CommandManager 没有暴露，你可以稍后添加）
-        List<String> cmdList = commandManager.getCommandNames(); // 你需要在这行编译前在 CommandManager 中添加 getCommandNames()
+        List<String> cmdList = commandManager.getCommandNames();
         result.put("commands", cmdList);
         respondJson(exchange, result);
     }

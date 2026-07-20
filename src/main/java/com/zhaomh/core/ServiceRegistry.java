@@ -1,12 +1,18 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ * Copyright (C) 2026 ZHAO-MH
+ */
+
 package com.zhaomh.core;
 
 public interface ServiceRegistry {
-    // 注册服务（通常由 builtin 插件或外部插件调用）
     <T> void register(Class<T> type, T instance);
 
-    // 获取服务（由 Command/Plugin 调用）
     <T> T getService(Class<T> type);
 
-    // 检查是否存在
     <T> boolean hasService(Class<T> type);
 }

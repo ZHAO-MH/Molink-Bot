@@ -1,3 +1,12 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ * Copyright (C) 2026 ZHAO-MH
+ */
+
 package com.zhaomh.plugin;
 
 import com.zhaomh.context.PluginContext;
@@ -6,9 +15,6 @@ import com.zhaomh.logger.Logger;
 import com.zhaomh.logger.LoggerFactory;
 import lombok.Getter;
 
-/**
- * 插件基类，建议所有插件继承此类，而不是直接实现 Plugin 接口
- */
 public abstract class BasePlugin implements Plugin {
     private static final Logger log = LoggerFactory.getLogger(BasePlugin.class);
 

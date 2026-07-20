@@ -1,3 +1,12 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ * Copyright (C) 2026 ZHAO-MH
+ */
+
 package com.zhaomh.plugin.impl;
 
 import com.zhaomh.bot.OneBotClient;
@@ -11,7 +20,7 @@ import com.zhaomh.plugin.PluginManager;
 import com.zhaomh.service.StatusService;
 import com.zhaomh.util.StringUtil;
 
-@Core  // 标记为核心服务，不可禁用
+@Core
 public class StatusPlugin extends BasePlugin implements StatusService {
 
     private final long startTime = System.currentTimeMillis();

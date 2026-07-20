@@ -1,3 +1,12 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ * Copyright (C) 2026 ZHAO-MH
+ */
+
 package com.zhaomh.web;
 
 import com.zhaomh.logger.Logger;
@@ -19,7 +28,6 @@ public class LoggingWebSocketServer {
     private final WebSocketServer server;
     private final ConcurrentLinkedQueue<WebSocket> clients = new ConcurrentLinkedQueue<>();
 
-    // 日志缓存：线程安全的列表，只追加，自动淘汰
     private final List<String> logCache = Collections.synchronizedList(new ArrayList<>());
 
     private static volatile LoggingWebSocketServer instance;
@@ -42,7 +50,6 @@ public class LoggingWebSocketServer {
 
             @Override
             public void onMessage(WebSocket conn, String message) {
-                // 忽略客户端消息（可用来做心跳确认）
             }
 
             @Override

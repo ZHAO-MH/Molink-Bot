@@ -1,3 +1,12 @@
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ * Copyright (C) 2026 ZHAO-MH
+ */
+
 package com.zhaomh;
 
 import com.zhaomh.bot.OneBotClient;
@@ -30,7 +39,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 应用程序上下文 —— 整个框架的“心脏”
+ * 应用程序上下文
  * 实现了 ServiceRegistry（服务注册表）和 Accessor（服务访问器）
  */
 public class ApplicationContext implements ServiceRegistry, Accessor {

@@ -1,12 +1,19 @@
-package com.zhaomh.model;
+/*
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ *
+ * SPDX-License-Identifier: MPL-2.0
+ * Copyright (C) 2026 ZHAO-MH
+ */
 
+package com.zhaomh.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.zhaomh.id.GroupId;
 import com.zhaomh.id.Identifiable;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Builder
