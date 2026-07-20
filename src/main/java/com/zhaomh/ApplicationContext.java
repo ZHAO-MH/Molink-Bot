@@ -26,7 +26,6 @@ import com.zhaomh.plugin.impl.*;
 import com.zhaomh.util.JsonUtil;
 import com.zhaomh.web.LoggingWebSocketServer;
 import com.zhaomh.web.WebUiServer;
-import lombok.Getter;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -65,31 +64,31 @@ public class ApplicationContext implements ServiceRegistry, Accessor {
         log.info("正在初始化 ApplicationContext...");
         this.logServer = new LoggingWebSocketServer(8078);
 
-        // ---------- 第1步：加载配置（无依赖） ----------
+        // ---------- 加载配置（无依赖） ----------
         this.botConfig = loadBotConfig();
-        register(BotConfig.class, botConfig); // 把配置也放进注册表
+        register(BotConfig.class, botConfig);
         log.info("配置加载完成");
 
-        // ---------- 第2步：创建 WebSocket 客户端（依赖 BotConfig） ----------
+        // ---------- 创建 WebSocket 客户端（依赖 BotConfig） ----------
         this.client = new OneBotClient(wsUrl);
-        register(OneBotClient.class, client); // 把客户端放进注册表
+        register(OneBotClient.class, client);
         log.info("OneBotClient 已创建");
 
-        // ---------- 第3步：创建事件管理器（依赖 Accessor） ----------
+        // ---------- 创建事件管理器（依赖 Accessor） ----------
         this.eventManager = new EventManager(this);
         register(EventManager.class, eventManager);
         log.info("EventManager 已创建");
 
-        // ---------- 第4步：创建命令管理器（依赖 EventManager + Accessor + BotConfig） ----------
+        // ---------- 创建命令管理器（依赖 EventManager + Accessor + BotConfig） ----------
         this.commandManager = new CommandManager(eventManager, this, botConfig);
         register(CommandManager.class, commandManager);
         log.info("CommandManager 已创建");
 
-        // ---------- 第5步：创建插件管理器（依赖 ServiceRegistry） ----------
+        // ---------- 创建插件管理器（依赖 ServiceRegistry） ----------
         this.pluginManager = new PluginManager(this);
         register(PluginManager.class, pluginManager);
 
-        // 5.1 准备所有插件类列表（包括核心插件和外部插件）
+        // 准备所有插件类列表（包括核心插件和外部插件）
         List<Class<? extends Plugin>> pluginClasses = List.of(
                 BuiltinBotPlugin.class,
                 StatusPlugin.class,
@@ -98,21 +97,21 @@ public class ApplicationContext implements ServiceRegistry, Accessor {
                 TestPlugin.class
         );
 
-        // 5.2 加载插件（内部自动拓扑排序 + 循环依赖检测 + 状态持久化）
+        // 加载插件（内部自动拓扑排序 + 循环依赖检测 + 状态持久化）
         pluginManager.loadPlugins(pluginClasses);
         pluginManager.loadExternalPlugins();
         log.info("PluginManager 加载完成，已加载 {} 个插件", pluginManager.getAllPlugins().size());
 
 
-        // ---------- 第6步：注册内置系统命令（依赖 PluginManager 和 ServiceRegistry） ----------
+        // ---------- 注册内置系统命令（依赖 PluginManager 和 ServiceRegistry） ----------
         commandManager.register(new PluginCommand(pluginManager));
         commandManager.register(new PermissionCommand(this)); // 权限命令需要访问注册表
         log.info("系统命令注册完成");
 
-        // ---------- 第7步：将事件管理器绑定到 WebSocket 客户端 ----------
+        // ---------- 将事件管理器绑定到 WebSocket 客户端 ----------
         client.setEventCallback(eventManager::call);
 
-        // ---------- 第8步：创建 WebUi 服务器（依赖 Accessor + PluginManager + OneBotClient + CommandManager ----------
+        // ---------- 创建 WebUi 服务器（依赖 Accessor + PluginManager + OneBotClient + CommandManager） ----------
         this.webUiServer = new WebUiServer(8079, this, pluginManager, client, commandManager);
         log.info("WebUi 服务器已创建");
 
@@ -161,14 +160,12 @@ public class ApplicationContext implements ServiceRegistry, Accessor {
         log.info("ApplicationContext 已关闭");
     }
 
-    // ==================== 实现 ServiceRegistry（注册能力） ====================
     @Override
     public <T> void register(Class<T> type, T instance) {
         registry.put(type, instance);
         log.debug("注册服务: {} -> {}", type.getSimpleName(), instance.getClass().getSimpleName());
     }
 
-    // ==================== 实现 Accessor（访问能力） ====================
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getService(Class<T> type) {
@@ -186,7 +183,6 @@ public class ApplicationContext implements ServiceRegistry, Accessor {
         return registry.containsKey(type);
     }
 
-    // ==================== 配置加载与持久化 ====================
     private BotConfig loadBotConfig() {
         Path configPath = Paths.get("./data/config.json");
         if (Files.exists(configPath)) {
