@@ -15,7 +15,7 @@ public class NumberUtil {
         return (int) (Math.random() * (max - min + 1) + min);
     }
 
-    public static boolean isInterger(String str) {
+    public static boolean isInteger(String str) {
         if (str == null || str.isBlank())
             return false;
 
