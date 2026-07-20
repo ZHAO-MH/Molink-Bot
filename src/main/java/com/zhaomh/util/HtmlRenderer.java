@@ -9,10 +9,7 @@
 
 package com.zhaomh.util;
 
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.ScreenshotType;
 import com.microsoft.playwright.options.WaitUntilState;
 
@@ -33,7 +30,9 @@ public class HtmlRenderer {
                         "--no-sandbox",
                         "--disable-setuid-sandbox",
                         "--disable-dev-shm-usage",
-                        "--disable-gpu"
+                        "--disable-gpu",
+                        "--disable-software-rasterizer",
+                        "--disable-extensions"
                 ))
         );
     }
@@ -43,16 +42,47 @@ public class HtmlRenderer {
      * @param html  完整 HTML 字符串
      * @param width 视口宽度，应与 body 宽度一致
      */
+//    public static byte[] render(String html, int width) {
+//        try (Page page = browser.newPage()) {
+//            page.setViewportSize(width, 0);
+//            page.setContent(html, new Page.SetContentOptions()
+//                    .setWaitUntil(WaitUntilState.NETWORKIDLE)
+//                    .setTimeout(10_000));
+//            page.waitForTimeout(300);
+//            return page.screenshot(new Page.ScreenshotOptions()
+//                    .setFullPage(true)
+//                    .setOmitBackground(true)   // 透明背景
+//                    .setType(ScreenshotType.PNG)
+//                    .setTimeout(10_000));
+//        }
+//    }
     public static byte[] render(String html, int width) {
         try (Page page = browser.newPage()) {
-            page.setViewportSize(width, 0);
+            page.setViewportSize(width, 720);      // 给一个初始高度，避免 0 计算
             page.setContent(html, new Page.SetContentOptions()
-                    .setWaitUntil(WaitUntilState.NETWORKIDLE));
-            page.waitForTimeout(300);
-            return page.screenshot(new Page.ScreenshotOptions()
-                    .setFullPage(true)
-                    .setOmitBackground(true)   // 透明背景
-                    .setType(ScreenshotType.PNG));
+                    .setWaitUntil(WaitUntilState.DOMCONTENTLOADED)
+                    .setTimeout(10_000));
+
+            // 等待字体渲染
+            page.waitForTimeout(500);
+
+            // 定位到 .card 元素
+            ElementHandle card = page.querySelector(".card");
+            if (card == null) {
+                // 降级到全页截图
+                return page.screenshot(new Page.ScreenshotOptions()
+                        .setOmitBackground(true)
+                        .setType(ScreenshotType.PNG)
+                        .setTimeout(15_000));
+            }
+
+            // 直接截取 .card 元素，背景透明
+            byte[] result = card.screenshot(new ElementHandle.ScreenshotOptions()
+                    .setOmitBackground(true)
+                    .setType(ScreenshotType.PNG)
+                    .setTimeout(10_000));
+            card.dispose();
+            return result;
         }
     }
 
